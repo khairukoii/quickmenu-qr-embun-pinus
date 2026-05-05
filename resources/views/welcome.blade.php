@@ -36,7 +36,13 @@
     </div>
 
     <div class="w-full h-[100dvh] mx-auto sm:max-w-[480px] flex flex-col bg-[#F8F9FA] relative overflow-hidden sm:shadow-2xl">
-      <header class="bg-white/90 backdrop-blur-xl px-6 pt-8 pb-4 rounded-b-[35px] shadow-[0_4px_25px_rgba(0,0,0,0.04)] z-20 sticky top-0">
+      <header class="bg-white/90 backdrop-blur-xl px-6 pt-6 pb-4 rounded-b-[35px] shadow-[0_4px_25px_rgba(0,0,0,0.04)] z-20 sticky top-0">
+        
+        <div class="flex items-center gap-2 mb-3">
+            <div class="w-7 h-7 bg-green-600 rounded-full flex items-center justify-center text-white text-[12px] shadow-sm">🌲</div>
+            <span class="font-black text-green-700 tracking-widest text-[11px] uppercase">Kafe Embun Pinus</span>
+        </div>
+
         <div class="flex justify-between items-center mb-5">
           <div>
             <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight leading-none" id="header-greeting">Halo, Tamu!</h1>
@@ -467,7 +473,6 @@
             alarm.currentTime = 0; 
             alarm.play().catch(e=>{});
 
-            // PERUBAHAN: Jeda loop diatur ke 2 detik (2000ms) biar pas sama nada cerianya
             audioLoopInterval = setInterval(() => {
                 alarm.currentTime = 0; 
                 alarm.play().catch(e=>{});
