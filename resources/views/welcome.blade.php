@@ -76,8 +76,11 @@
                 <img src="{{ str_starts_with($menu->image, 'http') ? $menu->image : asset('storage/' . $menu->image) }}" alt="{{ $menu->name }}" class="w-full h-full object-cover" />
               </div>
               <h3 class="font-bold text-gray-800 text-sm leading-tight pr-8 line-clamp-2 min-h-[40px]">{{ $menu->name }}</h3>
-              <p class="text-green-600 font-black text-[15px] mt-1">Rp {{ number_format($menu->price, 0, ',', '.') }}</p>
-              <button onclick="addToCart({{ $menu->id }}, '{{ addslashes($menu->name) }}', {{ $menu->price }})" class="absolute bottom-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-white font-black text-xl transition-transform active:scale-75 shadow-md bg-green-600">+</button>
+              <p class="text-green-600 font-black text-[15px] mt-1 mb-2">Rp {{ number_format($menu->price, 0, ',', '.') }}</p>
+              
+              <button onclick="addToCart({{ $menu->id }}, '{{ addslashes($menu->name) }}', {{ $menu->price }})" class="absolute bottom-3 right-3 px-3 py-1.5 rounded-full flex items-center justify-center text-white font-bold text-[11px] uppercase tracking-wider transition-transform active:scale-75 shadow-md bg-green-600">
+                Add <span class="text-sm font-black ml-1 leading-none">+</span>
+              </button>
             </div>
           @endforeach
         </div>
@@ -132,59 +135,73 @@
             <h2 class="text-2xl font-black text-gray-800">Bayar Tagihan</h2>
             <button onclick="hidePaymentModal()" class="bg-gray-100 hover:bg-gray-200 w-8 h-8 rounded-full font-bold text-gray-500 transition-colors">✕</button>
         </div>
-        <div class="bg-green-50 border border-green-100 p-4 rounded-2xl mb-4 text-center shadow-inner">
+        <div class="bg-green-50 border border-green-100 p-4 rounded-2xl mb-5 text-center shadow-inner">
             <p class="text-green-700/80 text-xs font-bold uppercase tracking-widest mb-1">Total Tagihan <span id="pay-name"></span></p>
             <h1 id="pay-amount" class="text-3xl font-black text-green-600">Rp 0</h1>
         </div>
         <p class="font-bold text-gray-800 mb-3 text-sm">Pilih Metode Pembayaran:</p>
         
         <div class="space-y-3 overflow-y-auto no-scrollbar pb-4 flex-1">
-            <label class="flex items-center justify-between p-3 border-2 border-yellow-200 bg-yellow-50 rounded-2xl cursor-pointer hover:border-yellow-500 transition-all focus-within:border-yellow-500 focus-within:bg-yellow-100/50">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-10 bg-yellow-400 rounded border border-yellow-500 flex items-center justify-center p-1.5 shadow-sm text-2xl">💵</div>
-                    <div>
-                        <span class="font-black text-yellow-900 block">Bayar Tunai</span>
-                        <span class="text-[10px] text-yellow-700 font-bold uppercase">Bayar langsung di Kasir</span>
+            
+            <label class="cursor-pointer block group">
+                <div class="p-3 border-2 border-gray-100 rounded-2xl transition-all flex items-center justify-between has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-10 shrink-0 bg-yellow-400 rounded-lg flex items-center justify-center p-1.5 shadow-sm border border-yellow-500 text-2xl">💵</div>
+                        <div>
+                            <span class="font-black text-gray-800 block">Bayar Tunai</span>
+                            <span class="text-[10px] text-gray-500 font-bold uppercase">Bayar langsung di Kasir</span>
+                        </div>
                     </div>
+                    <input type="radio" name="payment" value="Cash" class="w-6 h-6 accent-green-600 cursor-pointer" checked>
                 </div>
-                <input type="radio" name="payment" value="Cash" class="w-5 h-5 text-yellow-600 focus:ring-yellow-500">
             </label>
 
-            <label class="flex items-center justify-between p-3 border-2 border-gray-100 rounded-2xl cursor-pointer hover:border-green-500 transition-all focus-within:border-green-500 focus-within:bg-green-50/20">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-10 bg-white rounded border border-gray-200 flex items-center justify-center p-1.5 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg" alt="GoPay" class="max-h-full max-w-full object-contain">
+            <label class="cursor-pointer block group">
+                <div class="p-3 border-2 border-gray-100 rounded-2xl transition-all flex items-center justify-between has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-10 shrink-0 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
+                            <span class="text-blue-500 font-black italic text-[15px] tracking-tighter">gopay</span>
+                        </div>
+                        <span class="font-bold text-gray-800">GoPay</span>
                     </div>
-                    <span class="font-bold text-gray-700">GoPay</span>
+                    <input type="radio" name="payment" value="GoPay" class="w-6 h-6 accent-green-600 cursor-pointer">
                 </div>
-                <input type="radio" name="payment" value="GoPay" class="w-5 h-5 text-green-600 focus:ring-green-500" checked>
             </label>
-            <label class="flex items-center justify-between p-3 border-2 border-gray-100 rounded-2xl cursor-pointer hover:border-green-500 transition-all focus-within:border-green-500 focus-within:bg-green-50/20">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-10 bg-white rounded border border-gray-200 flex items-center justify-center p-1.5 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="max-h-full max-w-full object-contain">
+
+            <label class="cursor-pointer block group">
+                <div class="p-3 border-2 border-gray-100 rounded-2xl transition-all flex items-center justify-between has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-10 shrink-0 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
+                            <span class="text-blue-600 font-black italic text-[15px]">DANA</span>
+                        </div>
+                        <span class="font-bold text-gray-800">DANA</span>
                     </div>
-                    <span class="font-bold text-gray-700">DANA</span>
+                    <input type="radio" name="payment" value="DANA" class="w-6 h-6 accent-green-600 cursor-pointer">
                 </div>
-                <input type="radio" name="payment" value="DANA" class="w-5 h-5 text-green-600 focus:ring-green-500">
             </label>
-            <label class="flex items-center justify-between p-3 border-2 border-gray-100 rounded-2xl cursor-pointer hover:border-green-500 transition-all focus-within:border-green-500 focus-within:bg-green-50/20">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-10 bg-white rounded border border-gray-200 flex items-center justify-center p-1.5 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/OVO_logo.svg" alt="OVO" class="max-h-full max-w-full object-contain">
+
+            <label class="cursor-pointer block group">
+                <div class="p-3 border-2 border-gray-100 rounded-2xl transition-all flex items-center justify-between has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-10 shrink-0 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
+                            <span class="text-purple-600 font-black italic text-[15px]">OVO</span>
+                        </div>
+                        <span class="font-bold text-gray-800">OVO</span>
                     </div>
-                    <span class="font-bold text-gray-700">OVO</span>
+                    <input type="radio" name="payment" value="OVO" class="w-6 h-6 accent-green-600 cursor-pointer">
                 </div>
-                <input type="radio" name="payment" value="OVO" class="w-5 h-5 text-green-600 focus:ring-green-500">
             </label>
-            <label class="flex items-center justify-between p-3 border-2 border-gray-100 rounded-2xl cursor-pointer hover:border-green-500 transition-all focus-within:border-green-500 focus-within:bg-green-50/20">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-10 bg-white rounded border border-gray-200 flex items-center justify-center p-1.5 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="max-h-full max-w-full object-contain">
+
+            <label class="cursor-pointer block group">
+                <div class="p-3 border-2 border-gray-100 rounded-2xl transition-all flex items-center justify-between has-[:checked]:border-green-500 has-[:checked]:bg-green-50/50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-10 shrink-0 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
+                            <span class="text-blue-800 font-black italic text-[15px]">BCA</span>
+                        </div>
+                        <span class="font-bold text-gray-800">BCA Virtual Account</span>
                     </div>
-                    <span class="font-bold text-gray-700">BCA Virtual Account</span>
+                    <input type="radio" name="payment" value="BCA" class="w-6 h-6 accent-green-600 cursor-pointer">
                 </div>
-                <input type="radio" name="payment" value="BCA" class="w-5 h-5 text-green-600 focus:ring-green-500">
             </label>
         </div>
 
@@ -214,24 +231,22 @@
         </div>
     </div>
 
-    <div id="ready-modal" class="hidden fixed inset-0 bg-green-500 z-[70] flex items-center justify-center p-6 text-center backdrop-blur-md">
-        <div class="bg-white p-8 rounded-[35px] shadow-2xl w-full max-w-[340px] transform scale-100 animate-[bounce_1s_infinite]">
-            <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-pulse">🎉</div>
-            <h1 class="text-3xl font-black text-gray-800 mb-3 uppercase tracking-widest">Pesanan Siap!</h1>
+    <div id="ready-modal" class="hidden fixed inset-0 bg-green-500/90 z-[70] flex items-center justify-center p-6 text-center backdrop-blur-md">
+        <div class="bg-white p-8 rounded-[35px] shadow-2xl w-full max-w-[340px] animate-[bounce_1s_infinite]">
+            <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center text-5xl mx-auto mb-4 border-4 border-green-100 animate-pulse">🎉</div>
+            <h1 class="text-3xl font-black text-green-600 mb-3 uppercase tracking-tighter">PESANAN SIAP!</h1>
             
-            <div class="text-gray-600 text-sm font-medium leading-relaxed mb-6 space-y-2">
-                <p>Halo <span id="alarm-name" class="text-green-600 font-black text-base">Kak Tamu</span>,</p>
-                <p>Wah, wangi kopinya udah kecium nih! ☕ Pesanan spesial kamu sudah selesai diracik oleh barista kami.</p>
-                <p class="bg-gray-50 p-2 rounded-xl text-xs font-bold text-gray-500 border border-gray-100">
-                    Silakan ambil pesanan kamu di area Kasir/Pick-up. Selamat menikmati suasana sejuk di Embun Pinus! 🌲
-                </p>
+            <div class="text-gray-700 font-bold leading-relaxed mb-6 space-y-2">
+                <p>Halo <span id="alarm-name" class="text-gray-900 font-black text-lg"></span>,</p>
+                <p>Makanannya udah matang dan siap diambil nih di area Pick-up. Selamat menikmati!</p>
+                <p class="text-xs text-gray-400 mt-2">Ketuk tombol di bawah untuk mematikan notifikasi.</p>
             </div>
             
-            <button onclick="closeReadyModal()" class="w-full bg-gray-900 text-white font-black text-lg py-4 rounded-xl shadow-lg active:scale-95 transition-transform">OKE, MELUNCUR! 🏃‍♂️</button>
+            <button onclick="closeReadyModal()" class="w-full bg-green-600 text-white font-black text-lg py-4 rounded-xl shadow-lg shadow-green-600/40 active:scale-95 transition-transform">OKE, SAYA AMBIL!</button>
         </div>
     </div>
 
-    <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+    <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
 
     <script>
         document.body.style.paddingBottom = "env(safe-area-inset-bottom)";
@@ -240,6 +255,7 @@
         let isWaitingForOrder = false; 
         
         let vibrationInterval;
+        let audioLoopInterval; 
 
         window.addEventListener('beforeunload', function (e) {
             if (isWaitingForOrder) { e.preventDefault(); e.returnValue = ''; }
@@ -267,7 +283,7 @@
             document.getElementById('header-greeting').innerHTML = `Halo, <br><span class="text-green-600">${customerName}</span>!`;
             document.getElementById('header-avatar').textContent = customerName.charAt(0).toUpperCase();
             document.getElementById('pay-name').textContent = "Kak " + customerName;
-            document.getElementById('alarm-name').textContent = "Kak " + customerName;
+            document.getElementById('alarm-name').textContent = customerName;
         }
 
         let activeCategory = 'Semua';
@@ -375,7 +391,12 @@
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
 
-            document.getElementById('alarmSound').play().then(() => { document.getElementById('alarmSound').pause(); }).catch(e=>{});
+            const alarm = document.getElementById('alarmSound');
+            alarm.volume = 0;
+            alarm.play().then(() => {
+                alarm.pause();
+                alarm.currentTime = 0;
+            }).catch(e => console.log("Audio unlock:", e));
 
             setTimeout(async () => {
                 try {
@@ -441,20 +462,33 @@
             document.getElementById('waiting-info').classList.add('hidden');
             document.getElementById('ready-modal').classList.remove('hidden');
             
-            document.getElementById('alarmSound').currentTime = 0; 
-            document.getElementById('alarmSound').play();
+            const alarm = document.getElementById('alarmSound');
+            alarm.volume = 1.0; 
+            alarm.currentTime = 0; 
+            alarm.play().catch(e=>{});
+
+            // PERUBAHAN: Jeda loop diatur ke 2 detik (2000ms) biar pas sama nada cerianya
+            audioLoopInterval = setInterval(() => {
+                alarm.currentTime = 0; 
+                alarm.play().catch(e=>{});
+            }, 2000); 
 
             if (navigator.vibrate) {
-                navigator.vibrate([1000, 500, 1000]); 
+                navigator.vibrate([600, 400]); 
                 vibrationInterval = setInterval(() => {
-                    navigator.vibrate([1000, 500, 1000]);
-                }, 3000);
+                    navigator.vibrate([600, 400]);
+                }, 2000); 
             }
         }
 
         function closeReadyModal() {
             document.getElementById('ready-modal').classList.add('hidden');
-            document.getElementById('alarmSound').pause();
+            
+            clearInterval(audioLoopInterval);
+            
+            const alarm = document.getElementById('alarmSound');
+            alarm.pause();
+            alarm.currentTime = 0;
             
             if (navigator.vibrate) {
                 clearInterval(vibrationInterval);

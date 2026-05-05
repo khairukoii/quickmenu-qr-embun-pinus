@@ -261,7 +261,7 @@
             <div class="bg-[#F5F6F8] p-5 rounded-2xl mb-8 flex flex-wrap gap-4 items-end no-print border border-gray-200">
                 <div class="flex-1 min-w-[200px]">
                     <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Alamat IP Laptop</label>
-                    <input type="text" id="ip-address" value="http://192.168.100.224:8000" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none font-medium text-gray-700 bg-white shadow-inner">
+                    <input type="text" id="ip-address" value="http://10.137.26.37:8000" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none font-medium text-gray-700 bg-white shadow-inner">
                 </div>
                 <div class="w-32">
                     <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Jumlah Meja</label>
