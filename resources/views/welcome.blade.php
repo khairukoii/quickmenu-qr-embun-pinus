@@ -16,16 +16,16 @@
 <body class="bg-[#F8F9FA] sm:bg-gray-200 text-gray-800 antialiased selection:bg-green-200">
 
     <div id="welcome-modal" class="fixed inset-0 bg-gray-900/90 z-[70] flex items-center justify-center backdrop-blur-md transition-opacity duration-500 px-4">
-        <div class="bg-white w-full max-w-sm rounded-[35px] p-8 flex flex-col shadow-2xl transform transition-transform duration-500 scale-100 text-center">
-            <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center text-5xl shadow-inner mx-auto mb-6 border-4 border-white shadow-[0_10px_20px_rgba(21,128,61,0.2)]">🌲</div>
-            <h2 class="text-3xl font-black text-gray-800 tracking-tight">Hai, Selamat Datang!</h2>
-            <p class="text-gray-500 font-medium mt-2 mb-6">Kamu sekarang berada di <span class="font-black text-green-600 text-lg">Meja {{ $meja ?? '?' }}</span></p>
+        <div class="w-full max-w-sm rounded-[35px] p-8 flex flex-col shadow-2xl transform transition-transform duration-500 scale-100 text-center bg-gradient-to-br from-green-50 to-emerald-100 border border-green-200/50">
+            <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center text-5xl shadow-md mx-auto mb-6 border-4 border-green-100 shadow-[0_10px_20px_rgba(21,128,61,0.15)]">🌲</div>
+            <h2 class="text-3xl font-black text-green-900 tracking-tight">Hai, Selamat Datang!</h2>
+            <p class="text-green-700/80 font-medium mt-2 mb-6">Kamu sekarang berada di <span class="font-black text-green-600 text-lg bg-white px-2 py-0.5 rounded-lg shadow-sm">Meja {{ $meja ?? '?' }}</span></p>
 
-            <div class="mb-8 text-left">
-                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-2">Siapa nama panggilanmu?</label>
+            <div class="mb-8 text-left bg-white/60 p-4 rounded-3xl backdrop-blur-sm shadow-inner">
+                <label class="block text-xs font-bold text-green-800 uppercase tracking-widest mb-2 ml-2">Siapa nama panggilanmu?</label>
                 <div class="relative flex items-center">
-                    <span class="absolute left-5 text-xl text-gray-400">👤</span>
-                    <input type="text" id="customer-name-input" placeholder="Ketik di sini..." class="w-full bg-[#F5F6F8] border-2 border-transparent focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 rounded-2xl py-4 pl-14 pr-4 outline-none transition-all font-bold text-gray-800 text-lg shadow-inner">
+                    <span class="absolute left-5 text-xl text-green-600/50">👤</span>
+                    <input type="text" id="customer-name-input" placeholder="Ketik di sini..." class="w-full bg-white border-2 border-transparent focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 rounded-2xl py-4 pl-14 pr-4 outline-none transition-all font-bold text-gray-800 text-lg shadow-sm">
                 </div>
                 <p id="name-error" class="text-red-500 text-xs font-bold mt-2 ml-2 hidden animate-pulse">⚠️ Tolong isi nama kamu dulu ya!</p>
             </div>
