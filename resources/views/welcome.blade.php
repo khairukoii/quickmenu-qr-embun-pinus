@@ -252,7 +252,7 @@
         </div>
     </div>
 
-    <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
+    <audio id="alarmSound" src="https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3" preload="auto"></audio>
 
     <script>
         document.body.style.paddingBottom = "env(safe-area-inset-bottom)";
@@ -476,7 +476,7 @@
             audioLoopInterval = setInterval(() => {
                 alarm.currentTime = 0; 
                 alarm.play().catch(e=>{});
-            }, 2000); 
+            }, 2500); 
 
             if (navigator.vibrate) {
                 navigator.vibrate([600, 400]); 
